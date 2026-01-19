@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #1e293b, #020617);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #e5e7eb;
+}
+
+/* Page wrapper */
+.page {
+    width: 100%;
+    max-width: 520px;
+    padding: 1rem;
+}
+
+/* Form card */
+.note-form {
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 18px;
+    padding: 2.4rem;
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px rgba(148, 163, 184, 0.08);
+}
+
+/* Header */
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-header h1 {
+    color: #f8fafc;
+    font-size: 1.9rem;
+    letter-spacing: 0.3px;
+}
+
+.form-header p {
+    margin-top: 0.5rem;
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+/* Form groups */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.45rem;
+    font-weight: 600;
+    color: #cbd5f5;
+}
+
+/* Inputs */
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 0.8rem 0.9rem;
+    border-radius: 12px;
+    background-color: #020617;
+    border: 1px solid #1e293b;
+    color: #e5e7eb;
+    font-size: 0.95rem;
+    outline: none;
+    transition: 
+        border 0.2s ease, 
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Focus */
+input:focus,
+textarea:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
+    background-color: #020617;
+}
+
+/* Checkbox */
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 500;
+    color: #cbd5f5;
+}
+
+.checkbox-group input {
+    accent-color: #818cf8;
+}
+
+/* Button */
+button {
+    width: 100%;
+    margin-top: 1.6rem;
+    background: linear-gradient(135deg, #818cf8, #6366f1);
+    color: #020617;
+    border: none;
+    padding: 0.9rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: 
+        transform 0.15s ease, 
+        box-shadow 0.15s ease,
+        filter 0.15s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 35px rgba(99, 102, 241, 0.45);
+    filter: brightness(1.05);
+}
+
+button:active {
+    transform: translateY(0);
+}

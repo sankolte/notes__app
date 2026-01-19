@@ -1,0 +1,6 @@
+models me sirf sare schema declare karne and then export them 
+models menas tables (in sql terms) and its same aa schema ok so in notes app two main thninsg ekk tooh note and ekk users so 2 schema i.e two models
+one for user : emial , name ,and other details
+one for note : content,title,priority(important konse he ),created at what time ye sab cheeze 
+
+easy >>>>>>

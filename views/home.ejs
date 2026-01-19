@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link rel="stylesheet" href="/home.css">
+</head>
+<body>
+
+    <header class="header">
+        <h1>📝 Notes</h1>
+        <p>Make your day productive</p>
+        <a href="/notes/new">
+            <button>Create new Note</button>
+        </a>
+
+    </header>
+
+    <main class="container">
+
+        <% if (notes.length === 0) { %>
+            <p class="empty">No notes yet. Start writing ✨</p>
+        <% } %>
+
+        <div class="notes-grid">
+            <% for(let i = 0; i < notes.length; i++) { %>
+                <div class="note-card <%= notes[i].isImportant ? 'important' : '' %>">
+                    <h3><%= notes[i].title %></h3>
+                    <p class="content"><%= notes[i].content %></p>
+                   <form method="GET" action="/notes/<%=notes[i]._id %>/edit">
+                    <button>edit</button>
+                   </form>
+                   <form method="POST" action="/notes/delete/<%= notes[i]._id %>?_method=DELETE"><button>Delete</button></form>
+                    <div class="meta">
+                        <span><%= notes[i].createdAt.toDateString() %></span>
+                        <% if (notes[i].isImportant) { %>
+                            <span class="badge">Important</span>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+
+    </main>
+
+</body>
+</html>
+
+<!-- <% notes.forEach(u=>{ %>
+    <p><%= u.content %> </p>
+    <p><%= u.createdAt %> </p>
+    <p><%= u.isImportant %> </p>
+
+<% }) %>  -->

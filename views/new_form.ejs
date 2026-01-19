@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Note</title>
+    <link rel="stylesheet" href="/new_form.css">
+</head>
+<body>
+
+    <div class="page">
+        <form method="POST" action="/notes/form" class="note-form">
+
+            <div class="form-header">
+                <h1>Create New Note</h1>
+                <p>Capture your thoughts ✨</p>
+            </div>
+
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" name="title" placeholder="Enter a title" required>
+            </div>
+
+            <div class="form-group">
+                <label>Note</label>
+                <textarea name="content" placeholder="Write your note here..." required></textarea>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <label>
+                    <input type="checkbox" name="isImportant">
+                    Mark as important
+                </label>
+            </div>
+
+            <button type="submit">Publish Note</button>
+
+        </form>
+    </div>
+
+</body>
+</html>
