@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= view.title %> | Notes App</title>
+    <link rel="stylesheet" href="/view.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <a href="/notes" class="back-link">
+            <span class="material-icons">arrow_back</span>
+            Back to Notes
+        </a>
+
+        <div class="card-glass <%= view.isImportant ? 'important' : '' %>">
+            <% if (view.isImportant) { %>
+                <div class="badge-container">
+                    <span class="badge">Important Note</span>
+                </div>
+            <% } %>
+
+            <h1 class="note-title"><%= view.title %></h1>
+            <div class="divider"></div>
+            
+            <p class="note-content"><%= view.content %></p>
+
+            <div class="actions">
+                <form method="GET" action="/notes/<%= view._id %>/edit">
+                    <button class="btn btn-edit">
+                        <span class="material-icons">edit</span> Edit
+                    </button>
+                </form>
+                <form method="POST" action="/notes/delete/<%= view._id %>?_method=DELETE">
+                    <button class="btn btn-delete">
+                        <span class="material-icons">delete</span> Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

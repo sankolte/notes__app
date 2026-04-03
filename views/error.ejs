@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error <%= status %> | Notes App</title>
+    <link rel="stylesheet" href="/error.css">
+</head>
+<body>
+
+    <div class="error-container">
+        <div class="glitch-wrapper">
+            <h1 class="glitch" data-text="<%= status %>"><%= status %></h1>
+        </div>
+        <h2 class="error-title">Oops! Something went wrong.</h2>
+        <p class="error-message"><%= message %></p>
+        
+        <div class="actions">
+            <a href="/notes" class="btn btn-home">Return</a>
+        </div>
+        
+        <div class="aesthetic-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+    </div>
+
+</body>
+</html>

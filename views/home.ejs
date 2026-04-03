@@ -26,8 +26,10 @@
         <div class="notes-grid">
             <% for(let i = 0; i < notes.length; i++) { %>
                 <div class="note-card <%= notes[i].isImportant ? 'important' : '' %>">
-                    <h3><%= notes[i].title %></h3>
-                    <p class="content"><%= notes[i].content %></p>
+                    <a href="/notes/<%=notes[i]._id%>/view" class="note-link">
+                        <h3><%= notes[i].title %></h3>
+                        <p class="content"><%= notes[i].content %></p>
+                    </a>
                    <form method="GET" action="/notes/<%=notes[i]._id %>/edit">
                     <button>edit</button>
                    </form>

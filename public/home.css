@@ -67,6 +67,13 @@ body {
     color: #f8fafc;
 }
 
+/* Note Link Wrapper */
+.note-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .note-card .content {
     color: #cbd5f5;
     line-height: 1.6;

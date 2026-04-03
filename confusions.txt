@@ -1,0 +1,3 @@
+  Why === "on"?
+HTML Form Standard: When a checkbox is not checked, it sends nothing. When it is checked, HTML forms traditionally send the string value "on".
+Strict Comparison: The === operator ensures that the variable isImportant is both the string "on" and that the type is a string. Using == (loose equality) might lead to unexpected results if isImportant is 1 or true instead of "on".
