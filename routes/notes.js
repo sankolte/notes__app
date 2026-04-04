@@ -4,13 +4,13 @@ const mongoose = require("mongoose");
 const Note=require("../models/notes.js");   ///   ./ coz under ke under he same dir me he >>models me se notes.js ko uthaya
 const ExpressError=require("../utils/expressError.js");
 const wrapAsync=require("../utils/wrapAsync.js");
-const validateNote=require("../middleware.js");
+const { validateNote } = require("../middleware.js");
 
 
 
 
 
-   //home page
+   //home page 
 router.get("/",wrapAsync(async (req,res)=>{
     let notes = await Note.find();
     // console.log(notes);

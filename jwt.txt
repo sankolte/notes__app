@@ -1,0 +1,136 @@
+1. Signup (No JWT involved)
+User fills form
+Password → hashed using bcrypt
+Stored in DB
+That’s it. No token here. Correct.
+
+2. Login (Where JWT comes in)
+User sends:
+email + password
+Step 1: Password check
+Server finds user from DB
+Uses bcrypt to compare:
+
+ bcrypt.compare(plainPassword, hashedPassword)
+
+If wrong → reject
+If correct → move ahead
+
+3. Token creation (IMPORTANT)
+Now server creates a JWT using jsonwebtoken
+What is inside a token?
+A JWT is just a signed object, not magic.
+Example:
+const token = jwt.sign(
+ { userId: user._id },   // payload
+ "secretkey123",         // secret
+ { expiresIn: "1h" }
+);
+Token = 3 parts:
+HEADER.PAYLOAD.SIGNATURE
+Header → algorithm info
+Payload → your data (userId etc.)
+Signature → proves it's not tampered
+👉 Important:
+ Token is NOT stored in DB usually
+ It is generated on login
+
+basically token ekkach dar bante during login and then after that evrytime fakt check karte te server ki ha yacha secret mi banavla hota ka >> buss 
+
+4. Server sends token
+After login:
+res.json({ token });
+OR (better practice):
+res.cookie("token", token);
+Now user has the token.
+
+5. Next request (This is where confusion happens)
+User sends request again:
+GET /profile
+Authorization: Bearer <token>
+
+6. Server verifies token
+Now server does:
+jwt.verify(token, "secretkey123")
+What happens internally?
+Checks signature using secret
+If signature matches → valid
+If not → reject
+👉 If valid:
+ You get payload back:
+{ userId: "abc123" }
+
+7. Then what?
+Server now:
+Knows WHICH user is making request
+Fetches user data
+Sends response
+
+🔥 Important corrections to your thinking
+❌ Wrong idea:
+“token is created when request is sent”
+👉 No.
+ Token is created ONLY during login
+
+❌ Wrong idea:
+“server checks secret of token id”
+👉 Not exactly.
+ Server checks:
+Was this token signed with MY secret?
+Has it expired?
+
+❌ Wrong idea:
+“token is like a session stored somewhere”
+👉 No.
+ JWT is stateless:
+Server does NOT store it
+Client holds it
+
+🧠 Simple analogy
+Think of JWT like:
+You enter a club (login)
+Bouncer gives you a stamped band (token)
+Next time:
+You don’t show ID again
+You just show the band
+Server checks:
+ 👉 “Is this band legit (signature)?”
+ 👉 “Is it expired?”
+
+🧩 Full Flow Summary
+SIGNUP → store hashed password
+
+LOGIN → verify password → create JWT → send token
+
+REQUEST → client sends token
+
+SERVER → verifies token → allows access
+
+⚠️ One brutal truth (important for you)
+Right now your confusion is not about JWT — it’s about request lifecycle and stateless systems.
+If you don’t deeply understand:
+request → response cycle
+headers
+middleware
+JWT will keep confusing you
+
+
+Code Structure And Workflow >>
+Fistly see we will hash the password by using mongoose hook (pre) before saving data into db is user model 
+ok >> 
+then now new concept of methids >> 
+we can add our explicit methods into the userSchema jo same jo dusre in built methods he findById or like that jaise kaam karte 
+but they are user built 
+waha pe hum 
+1. password campare karen ki 
+2. method => accessToken banane ki 
+which both will be used in loging in user >>>>>>>>
+like methods>
+
+
+
+iss sab ke sath isLoggedin and iss sab ke uper ekk middleware bana denege 
+if (!token){
+----}
+aisa kuch>> 
+

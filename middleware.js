@@ -1,5 +1,8 @@
 // joi middleware for db validations >>
-const noteSchema= require("./schema.js");
+const {noteSchema} = require("./schema.js");
+const {userSchema}=require("./schema.js");
+const jwt = require("jsonwebtoken");
+
 const ExpressError=require("./utils/expressError.js");
 
 function validateNote(req,res,next){
@@ -14,4 +17,37 @@ function validateNote(req,res,next){
 
 }
 
-module.exports = validateNote;
+
+function validateUser(req,res,next){
+    const result2 = userSchema.validate(req.body);
+    let {error} = result2;
+    if(error){
+
+        let msg = error.details.map((el)=>el.message).join(",");
+
+
+        return next(new ExpressError(400,msg));
+    }
+    next();
+    
+}
+
+
+
+function isAuthenticated(req, res, next) {
+    const accessToken = req?.cookies?.accessToken;
+    if (!accessToken) {
+        return res.redirect("/users/login");
+    }
+    
+    try {
+        const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+        req.user = decoded; // attaching decoded user to request
+        next();
+    } catch (err) {
+        return res.redirect("/users/login");
+    }
+}
+
+module.exports = {validateNote,validateUser,isAuthenticated};
+

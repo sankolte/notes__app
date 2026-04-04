@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Note</title>
     <link rel="stylesheet" href="/edit.css">
 </head>
+
 <body>
 
     <header class="header">
@@ -17,47 +19,41 @@
 
     <main class="container">
 
-    <% if (find) { %>
+        <% if (find) { %>
 
-        <div class="note-card">
+            <div class="note-card">
 
-            <form method="POST" action="/notes/<%= find._id %>?_method=Patch" class="edit-form needs-validation" novalidate>
+                <form method="POST" action="/notes/<%= find._id %>?_method=Patch" class="edit-form needs-validation"
+                    novalidate>
 
-                <input type="hidden" name="id" value="<%= find._id %>">
+                    <input type="hidden" name="id" value="<%= find._id %>">
 
-                <label>Title</label>
-                <input 
-                    type="text" 
-                    name="title" 
-                    value="<%= find.title %>" 
-                    required
-                >
+                    <label>Title</label>
+                    <input type="text" name="title" value="<%= find.title %>" required>
 
-                <label>Content</label>
-                <textarea name="content" rows="8" required><%= find.content %></textarea>
+                    <label>Content</label>
+                    <textarea name="content" rows="8" required><%= find.content %></textarea>
 
-                <label class="checkbox">
-                    <input 
-                        type="checkbox" 
-                        name="isImportant"
-                        <%= find.isImportant ? "checked" : "" %>
-                    >
-                    Mark as important
-                </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="isImportant" <%=find.isImportant ? "checked" : "" %>
+                        >
+                        Mark as important
+                    </label>
 
-                <button type="submit">Update Note</button>
+                    <button type="submit">Update Note</button>
 
-            </form>
+                </form>
 
-        </div>
+            </div>
 
-    <% } else { %>
-        <p class="empty">Note not found 😢</p>
-    <% } %>
+            <% } else { %>
+                <p class="empty">Note not found 😢</p>
+                <% } %>
 
-</main>
+    </main>
 
 
-<script src="/js/script.js"></script>
+    <script src="/js/script.js"></script>
 </body>
+
 </html>

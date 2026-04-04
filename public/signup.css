@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #020617; /* Very deep dark theme */
+    display: flex;
+    color: #e2e8f0;
+}
+
+/* Container for split screen */
+.auth-container {
+    display: flex;
+    width: 100%;
+}
+
+/* Left Hero Section */
+.auth-hero {
+    flex: 1;
+    background: linear-gradient(145deg, #0f172a, #1e1b4b, #312e81);
+    background-size: 200% 200%;
+    display: none; /* Hide on mobile */
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.auth-hero:hover {
+    background-position: 100% 100%;
+    box-shadow: inset -20px 0 80px rgba(99, 102, 241, 0.15);
+}
+
+@media (min-width: 900px) {
+    .auth-hero {
+        display: flex;
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 500px;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.auth-hero:hover .hero-content {
+    transform: translateX(15px) scale(1.02);
+}
+
+.hero-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e0e7ff;
+    margin-bottom: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 99px;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #a5b4fc;
+    line-height: 1.6;
+}
+
+/* Right Side - Form Wrapper */
+.auth-form-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #020617; /* Pure dark */
+    padding: 2rem;
+}
+
+.auth-form {
+    width: 100%;
+    max-width: 440px;
+    background: rgba(15, 23, 42, 0.85); /* Solid dark card feel */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* light subtle border */
+    border-radius: 20px;
+    padding: 2.5rem;
+}
+
+/* Header */
+.form-header {
+    margin-bottom: 2.5rem;
+}
+
+.form-header h1 {
+    color: #f8fafc;
+    font-size: 2.2rem;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.6rem;
+}
+
+.form-header p {
+    color: #94a3b8;
+    font-size: 1rem;
+}
+
+/* Two column row inside form */
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* Form groups */
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #cbd5f5;
+    font-size: 0.9rem;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.9rem 1.1rem;
+    border-radius: 12px;
+    background-color: #0f172a;
+    border: 1px solid #1e293b;
+    color: #f1f5f9;
+    font-size: 1rem;
+    outline: none;
+}
+
+input:hover {
+    border-color: #334155;
+}
+
+input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+    background-color: #0f172a;
+}
+
+input::placeholder {
+    color: #64748b;
+}
+
+/* Button */
+button {
+    width: 100%;
+    margin-top: 1rem;
+    background: #4f46e5;
+    color: #ffffff;
+    border: none;
+    padding: 1.1rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #4338ca;
+}
+
+/* Login section */
+.auth-action {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: #94a3b8;
+}
+
+.auth-action a {
+    color: #818cf8;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 0.3rem;
+}
+
+.auth-action a:hover {
+    color: #a5b4fc;
+    text-decoration: underline;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Write</title>
+    <link rel="stylesheet" href="/signup.css?v=4">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+    <div class="auth-container">
+        <!-- Left Side Hero -->
+        <div class="auth-hero">
+            <div class="hero-content">
+                <div class="hero-logo">
+                    <span class="material-icons">draw</span>
+                    Write
+                </div>
+                <h1 class="hero-title">Welcome back.<br>Resume your work.</h1>
+                <p class="hero-subtitle">Log in to access your thoughts, daily plans, and genius moments.</p>
+            </div>
+        </div>
+
+        <!-- Right Side Form -->
+        <div class="auth-form-wrapper">
+            <form method="POST" action="/users/login" class="auth-form needs-validation" novalidate>
+                <div class="form-header">
+                    <h1>Welcome Back</h1>
+                    <p>Log in to your account.</p>
+                </div>
+
+                <% if (typeof error !== 'undefined') { %>
+                    <div style="background-color: #ffebee; color: #c62828; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-size: 14px; text-align: center; border: 1px solid #ef9a9a;">
+                        <%= error %>
+                    </div>
+                <% } %>
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="johndy" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit">Log In</button>
+
+                <div class="auth-action">
+                    Don't have an account? <a href="/users/signup">Sign up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

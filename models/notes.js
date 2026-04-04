@@ -9,7 +9,7 @@ const noteSchema=new mongoose.Schema({
     content:{
         type:String,
         required:true
-        
+
         
     },
     createdAt:{
@@ -19,6 +19,10 @@ const noteSchema=new mongoose.Schema({
     isImportant:{
         type:Boolean,
         default:false        //this is impp to set its default value as false 
+    },
+    writer:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
     }
 })
 //ye hogyi sari fields like schema jo ki use hogi in models
