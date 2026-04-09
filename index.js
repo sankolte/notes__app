@@ -12,7 +12,7 @@ const methodOverride = require("method-override");
 const ExpressError = require("./utils/expressError.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const cookieParser = require("cookie-parser");
-const { isAuthenticated } = require("./middleware.js");
+const { isAuthenticated, checkUser } = require("./middleware.js");
 
 
 app.set("views", path.join(__dirname, "views"));
@@ -26,7 +26,9 @@ app.use(express.urlencoded({ extended: true }));     //for parsing the data cmon
 app.use(cookieParser());
 app.use(methodOverride("_method"));
 
-app.use("/notes", isAuthenticated, notesRouter); // router ka middleware >>
+app.use(checkUser);
+
+app.use("/notes", notesRouter);
 app.use("/users", userRouter);
 
 
@@ -44,10 +46,9 @@ main()
     })
 
 
-// app.get("/",(req,res)=>{
-//     console.log("working");
-//     res.send("url is localhost:3000/notes bi*ch");
-// })
+app.get("/",(req,res)=>{
+    res.redirect("/notes");
+})
 
 app.use((req, res, next) => {
     next(new ExpressError(404, "page not found "));

@@ -5,24 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes App</title>
     <link rel="stylesheet" href="/home.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
-    <header class="header">
-        <a href="/users/signup"><button>Sign Up</button></a>
-        <a href="/users/login"><button>LogIn</button></a>
-        <h1>📝Write App</h1>
-        <p>Make your day productive</p>
-        <a href="/notes/new">
-            <button>Create new Note</button>
-        </a>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <h1>📝Write<span>App</span></h1>
+        </div>
+        <div class="nav-controls">
+            <% if (!currUser) { %>
+                <a href="/users/signup" class="btn-glow">Sign Up</a>
+                <a href="/users/login" class="btn-outline">Log In</a>
+            <% } else { %>
+                <span class="user-greeting">Hey, <span class="highlight"><%= currUser.username %></span> ✨</span>
+                <form action="/users/logout" method="GET" style="display:inline;">
+                    <button type="submit" class="btn-logout"><span class="material-icons">logout</span></button>
+                </form>
+            <% } %>
+        </div>
+    </nav>
 
+    <header class="hero">
+        <h2>Capture Your Thoughts</h2>
+        <p>Make your day incredibly productive by organizing your ideas.</p>
+        
+        <div class="hero-action">
+            <a href="/notes/new" class="btn-glow">
+                <span class="material-icons">add_box</span> Create Note
+            </a>
+        </div>
+
+        <% if (currUser) { %>
+            <div class="search-container">
+                <form action="/notes" method="GET" class="search-bar">
+                    <span class="material-icons search-icon">search</span>
+                    <input type="text" name="q" placeholder="Search ideas..." value="<%= locals.searchQuery || '' %>" autocomplete="off">
+                </form>
+            </div>
+        <% } %>
     </header>
 
     <main class="container">
 
         <% if (notes.length === 0) { %>
-            <p class="empty">No notes yet. Start writing ✨</p>
+            <% if (locals.searchQuery) { %>
+                <p class="empty">No notes match your search "<%= locals.searchQuery %>".</p>
+            <% } else { %>
+                <p class="empty">No notes yet. Start writing ✨</p>
+            <% } %>
         <% } %>
 
         <div class="notes-grid">
@@ -36,6 +67,7 @@
                     <button>edit</button>
                    </form>
                    <form method="POST" action="/notes/delete/<%= notes[i]._id %>?_method=DELETE"><button>Delete</button></form>
+                   <p class="author">By: <%= notes[i].user ? notes[i].user.username : 'Unknown' %></p>
                     <div class="meta">
                         <span><%= notes[i].createdAt.toDateString() %></span>
                         <% if (notes[i].isImportant) { %>

@@ -20,7 +20,7 @@ const noteSchema=new mongoose.Schema({
         type:Boolean,
         default:false        //this is impp to set its default value as false 
     },
-    writer:{
+    user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
     }

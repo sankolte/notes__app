@@ -37,7 +37,7 @@ function validateUser(req,res,next){
 function isAuthenticated(req, res, next) {
     const accessToken = req?.cookies?.accessToken;
     if (!accessToken) {
-        return res.redirect("/users/login");
+        return res.redirect("/users/signup");
     }
     
     try {
@@ -45,9 +45,27 @@ function isAuthenticated(req, res, next) {
         req.user = decoded; // attaching decoded user to request
         next();
     } catch (err) {
-        return res.redirect("/users/login");
+        return res.redirect("/users/signup");
     }
 }
 
-module.exports = {validateNote,validateUser,isAuthenticated};
+function checkUser(req, res, next) {
+    const accessToken = req?.cookies?.accessToken;
+    if (accessToken) {
+        try {
+            const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+            req.user = decoded;
+            res.locals.currUser = decoded;
+        } catch (err) {
+            req.user = null;
+            res.locals.currUser = null;
+        }
+    } else {
+        req.user = null;
+        res.locals.currUser = null;
+    }
+    next();
+}
+
+module.exports = {validateNote,validateUser,isAuthenticated,checkUser};
 

@@ -72,6 +72,12 @@ router.post("/logIn", wrapAsync(async (req, res) => {
 
 }))
 
+router.get("/logout", (req, res) => {
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
+    res.redirect("/notes");
+});
+
 
 
 module.exports = router;

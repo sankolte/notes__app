@@ -3,7 +3,7 @@ const Joi = require("joi");
 const noteSchema = Joi.object({
   title: Joi.string().min(3).max(300).required(),
   content: Joi.string().min(3).max(5000).required(),
-  isImportant: Joi.boolean()
+  isImportant: Joi.boolean().truthy('on')
 
 });
 //ye humen sirf validatons lagaye >> agar ye validations hue achese to thik verna for handling these error middleware.js me he >> main cheez for handling all errors regarding validarion errrors>
