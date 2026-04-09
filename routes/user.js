@@ -4,13 +4,13 @@ const mongoose = require("mongoose");
 const User = require("../models/users.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/expressError.js");
-const { validateUser } = require("../middleware.js");
+const { validateUser, strictRateLimiter } = require("../middleware.js");
 
 router.get("/signup", (req, res) => {
     res.render("signup.ejs");
 })
 
-router.post("/signUp", validateUser, wrapAsync(async (req, res, next) => {
+router.post("/signUp",strictRateLimiter, validateUser, wrapAsync(async (req, res, next) => {
     try {
         let { name, email, username, password } = req.body;
         let newUser = new User({
@@ -38,7 +38,7 @@ router.get("/login", (req, res) => {
 
 })
 
-router.post("/logIn", wrapAsync(async (req, res) => {
+router.post("/logIn",strictRateLimiter, wrapAsync(async (req, res) => {
     let { username, password } = req.body;
     let user = await User.findOne({ username });
     //jer user sapadla nahi ter >

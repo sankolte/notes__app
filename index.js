@@ -12,7 +12,9 @@ const methodOverride = require("method-override");
 const ExpressError = require("./utils/expressError.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const cookieParser = require("cookie-parser");
-const { isAuthenticated, checkUser } = require("./middleware.js");
+const {globalRateLimiter, isAuthenticated, checkUser } = require("./middleware.js");
+
+const rateLimit = require("express-rate-limit");
 
 
 app.set("views", path.join(__dirname, "views"));
@@ -27,6 +29,10 @@ app.use(cookieParser());
 app.use(methodOverride("_method"));
 
 app.use(checkUser);
+
+app.set('trust proxy', 1);
+
+app.use(globalRateLimiter);    //we are passsing it gloabally for all 
 
 app.use("/notes", notesRouter);
 app.use("/users", userRouter);
